@@ -12,8 +12,8 @@ final class FindMissingTranslationsTest extends TestCase
     {
         $this
             ->artisan(FindMissingTranslations::class, [
-                'language directory' => __DIR__.'/sync_lang_files',
-                'base locale' => 'en',
+                '--dir' => __DIR__.'/sync_lang_files',
+                '--base' => 'en',
             ])
             ->assertExitCode(0)
             ->expectsOutput('Successfully compared all languages.');
@@ -26,10 +26,9 @@ final class FindMissingTranslationsTest extends TestCase
 
         $this
             ->artisan(FindMissingTranslations::class, [
-                'language directory' => __DIR__.'/unsync_lang_files',
-                'base locale' => 'en',
+                '--dir' => __DIR__.'/unsync_lang_files',
+                '--base' => 'en',
             ]);
-
         $output = \Artisan::output();
 
         $this->assertStringContainsString('Found missing translations in /be/a.php', $output);

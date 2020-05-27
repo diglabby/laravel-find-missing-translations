@@ -18,32 +18,32 @@ class FindMissingTranslations extends Command
      * @var string
      */
     protected $signature = 'translations:missing
-                                    {language directory? : Relative path of language directory for ex. "/resources/lang" is a directory that contains all supported languages.}
-                                    {base locale? : base locale for ex. "en". All other languages are compared to this language.}';
+                                    {--dir=: Relative path of lang directory, e.g. "/resources/lang", a directory that contains all supported locales.}
+                                    {--base=: Base locale, e.g. "en". All other locales are compared to this locale.}';
 
     /**
      * The console command description.
      * @var string
      */
-    protected $description = 'This command helps developers to finding words which are not translated, by comparing one base locale to others.';
+    protected $description = 'Helps developers to finding words which are not translated, by comparing one base locale to others.';
 
     /** @inheritDoc */
     public function handle(): void
     {
-        if ($this->argument('language directory') === null) {
-            $langDir = resource_path(self::DEFAULT_LANG_DIRNAME);
-        } elseif (File::isDirectory($this->argument('language directory'))) {
-            $langDir = $this->argument('language directory');
-        } elseif (File::isDirectory(base_path($this->argument('language directory')))) {
-            $langDir = base_path($this->argument('language directory'));
+        if ($this->option('dir') === null) {
+            $dir = resource_path(self::DEFAULT_LANG_DIRNAME);
+        } elseif (File::isDirectory($this->option('dir'))) {
+            $dir = $this->option('dir');
+        } elseif (File::isDirectory(base_path($this->option('dir')))) {
+            $dir = base_path($this->option('dir'));
         } else {
-            throw new DirectoryNotFoundException("Specified resource directory {$this->argument('language directory')} does not exist.");
+            throw new DirectoryNotFoundException("Specified resource directory {$this->option('dir')} does not exist.");
         }
 
-        $baseLocale = $this->argument('base locale') ?: config('app.locale');
-        $baseLocaleDirPath = $langDir.\DIRECTORY_SEPARATOR.$baseLocale;
+        $baseLocale = $this->option('base') ?: config('app.locale');
+        $baseLocaleDirPath = $dir.\DIRECTORY_SEPARATOR.$baseLocale;
 
-        $directoriesOfLanguages = File::directories($langDir);
+        $directoriesOfLanguages = File::directories($dir);
         $baseLanguageFiles = $this->getFilenames($baseLocaleDirPath);
 
         foreach ($directoriesOfLanguages as $languageDirectory) {
@@ -96,7 +96,7 @@ class FindMissingTranslations extends Command
                 $this->error("\tFound missing translations in /{$languageName}/{$filename}:", 'q');
 
                 foreach ($missingKeys as $key) {
-                    $this->line("\t\t\"{$key}\" is not translated to /{$languageName}/{$filename}");
+                    $this->line("\t\t\"{$key}\" is not translated to /{$languageName}/{$filename}", 'q');
                 }
             }
         } else {
