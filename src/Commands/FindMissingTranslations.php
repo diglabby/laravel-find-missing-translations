@@ -18,8 +18,8 @@ class FindMissingTranslations extends Command
      * @var string
      */
     protected $signature = 'translations:missing
-                                    {--dir=: Relative path of lang directory, e.g. "/resources/lang", a directory that contains all supported locales.}
-                                    {--base=: Base locale, e.g. "en". All other locales are compared to this locale.}';
+                                    {--dir= : Relative path of lang directory, e.g. "/resources/lang", a directory that contains all supported locales}
+                                    {--base= : Base locale, e.g. "en". All other locales are compared to this locale}';
 
     /**
      * The console command description.
