@@ -11,7 +11,7 @@ Output example:
 
 ## Installation
 ```sh
-composer require diglabby/laravel-find-missing-translations
+composer require diglabby/laravel-find-missing-translations --dev
 ```
 
 ## Usage
