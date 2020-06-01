@@ -2,8 +2,16 @@
     "name": "diglabby/laravel-find-missing-translations",
     "description": "A console command to find missing translations for Laravel projects",
     "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "diglabby",
+        "laravel",
+        "translation"
+    ],
     "require": {
-        "php": "^7.1.3"
+        "php": "^7.1.3",
+        "illuminate/console": "^5.8|^6.0|^7.0",
+        "illuminate/support": "^5.8|^6.0|^7.0"
     },
     "require-dev": {
         "orchestra/testbench": "^3.8|^4.0|^5.0",
@@ -19,7 +27,6 @@
             "Diglabby\\FindMissingTranslations\\Tests\\": "tests"
         }
     },
-    "license": "MIT",
     "scripts": {
         "test": "vendor/bin/phpunit"
     },
