@@ -4,6 +4,7 @@ namespace Diglabby\FindMissingTranslations\Tests\Commands;
 
 use Diglabby\FindMissingTranslations\Commands\FindMissingTranslations;
 use Diglabby\FindMissingTranslations\Tests\TestCase;
+use Illuminate\Support\Facades\Artisan;
 
 final class FindMissingTranslationsTest extends TestCase
 {
@@ -17,7 +18,7 @@ final class FindMissingTranslationsTest extends TestCase
                 '--dir' => __DIR__.'/sync_lang_files',
                 '--base' => 'en',
             ]);
-        $output = \Artisan::output();
+        $output = Artisan::output();
 
         $this->assertSame(0, $exitCode);
         $this->assertSame('Successfully compared all languages.', trim($output));
@@ -33,9 +34,9 @@ final class FindMissingTranslationsTest extends TestCase
                 '--dir' => __DIR__.'/unsync_lang_files',
                 '--base' => 'en',
             ]);
-        $output = \Artisan::output();
+        $output = Artisan::output();
 
         $this->assertSame(1, $exitCode);
-        $this->assertStringContainsString('"OK" is not translated to /be/a.php', $output);
+        $this->assertStringContainsString('| be     | a.php | OK  |', $output);
     }
 }
