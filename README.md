@@ -7,7 +7,7 @@ It takes a basic locale and find missing keys/translations in other locales.
 
 Output example:
 
-<img src="https://user-images.githubusercontent.com/5278175/83392019-1ace4300-a3fd-11ea-85c0-852229a11354.png" alt="Output example" width="500">
+<p align="center"><img src="https://i.imgur.com/0vjOwfq.gif" alt="Output example" width="500"></p>
 
 ## Installation
 ```sh
