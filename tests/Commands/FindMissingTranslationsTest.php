@@ -13,11 +13,8 @@ final class FindMissingTranslationsTest extends TestCase
     {
         $this->withoutMockingConsoleOutput();
 
-        $exitCode = $this
-            ->artisan(FindMissingTranslations::class, [
-                '--dir' => __DIR__.'/sync_lang_files',
-                '--base' => 'en',
-            ]);
+        $dir = __DIR__.'/sync_lang_files';
+        $exitCode = $this->artisan("translations:missing --dir=$dir --base=en");
         $output = Artisan::output();
 
         $this->assertSame(0, $exitCode);
@@ -29,11 +26,8 @@ final class FindMissingTranslationsTest extends TestCase
     {
         $this->withoutMockingConsoleOutput();
 
-        $exitCode = $this
-            ->artisan(FindMissingTranslations::class, [
-                '--dir' => __DIR__.'/unsync_lang_files',
-                '--base' => 'en',
-            ]);
+        $dir = __DIR__.'/unsync_lang_files';
+        $exitCode = $this->artisan("translations:missing --dir=$dir --base=en");
         $output = Artisan::output();
 
         $this->assertSame(1, $exitCode);
