@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.22.2@d768d914152dbbf3486c36398802f74e80cfde48">
   <file src="src/Commands/FindMissingTranslations.php">
-    <MissingPropertyType>
-      <code><![CDATA[$exitCode]]></code>
-    </MissingPropertyType>
+    <MixedArgument>
+      <code><![CDATA[$baseLanguageFile]]></code>
+      <code><![CDATA[$currentLocaleDirectoryPath]]></code>
+      <code><![CDATA[$secondArray[$key]]]></code>
+      <code><![CDATA[$secondLanguageFile]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$baseLanguageFile]]></code>
+      <code><![CDATA[$currentLocaleDirectoryPath]]></code>
+      <code><![CDATA[$secondLanguageFile]]></code>
+      <code><![CDATA[$value]]></code>
+    </MixedAssignment>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$outputDiff]]></code>
+      <code><![CDATA[list<string>]]></code>
+    </MixedReturnTypeCoercion>
     <NonInvariantDocblockPropertyType>
       <code><![CDATA[$description]]></code>
     </NonInvariantDocblockPropertyType>
@@ -14,13 +27,15 @@
       <code><![CDATA[$this->option('dir')]]></code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
-      <code><![CDATA[$baseLocale]]></code>
       <code><![CDATA[$pathToLocates]]></code>
       <code><![CDATA[$this->option('dir')]]></code>
       <code><![CDATA[$this->option('dir')]]></code>
       <code><![CDATA[$this->option('dir')]]></code>
       <code><![CDATA[$this->option('dir')]]></code>
     </PossiblyInvalidCast>
+    <PossiblyNullOperand>
+      <code><![CDATA[$pathToLocates]]></code>
+    </PossiblyNullOperand>
     <PropertyNotSetInConstructor>
       <code><![CDATA[FindMissingTranslations]]></code>
       <code><![CDATA[FindMissingTranslations]]></code>
@@ -31,5 +46,8 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$this->option('base')]]></code>
     </RiskyTruthyFalsyComparison>
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[\Symfony\Component\Finder\SplFileInfo[]]]></code>
+    </UnnecessaryVarAnnotation>
   </file>
 </files>

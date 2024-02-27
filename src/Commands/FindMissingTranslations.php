@@ -29,7 +29,7 @@ class FindMissingTranslations extends Command
      */
     protected $description = 'Helps developers to finding words which are not translated, by comparing one base locale to others.';
 
-    private $exitCode = 0;
+    private int $exitCode = 0;
 
     /** @inheritDoc */
     public function handle(): int
@@ -45,6 +45,7 @@ class FindMissingTranslations extends Command
         }
 
         $baseLocale = $this->option('base') ?: config('app.locale');
+        assert(is_string($baseLocale), 'Invalid base locale');
         $baseLocaleDirectoryPath = $pathToLocates.\DIRECTORY_SEPARATOR.$baseLocale;
 
         $localeDirectories = File::directories($pathToLocates);
@@ -70,6 +71,10 @@ class FindMissingTranslations extends Command
         return $this->exitCode;
     }
 
+    /**
+     * @param list<string> $baseLanguageFiles
+     * @param list<string> $languageFiles
+     */
     private function compareLanguages(string $baseLanguagePath, array $baseLanguageFiles, string $languagePath, array $languageFiles, string $languageName): void
     {
         foreach ($baseLanguageFiles as $languageFile) {
@@ -100,7 +105,10 @@ class FindMissingTranslations extends Command
         }
     }
 
-    /** Compare array keys recursively */
+    /**
+     * Compare array keys recursively
+     * @return list<string>
+     */
     private function arrayDiffRecursive(array $firstArray, array $secondArray): array
     {
         $outputDiff = [];
@@ -125,6 +133,7 @@ class FindMissingTranslations extends Command
 
     /**
      * Get filenames of directory
+     * @return list<string>
      */
     private function getFilenames(string $directory): array
     {
