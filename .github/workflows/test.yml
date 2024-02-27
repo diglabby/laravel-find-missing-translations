@@ -14,6 +14,11 @@ jobs:
                 laravel: [10.*, 9.*]
                 dependency-version: [prefer-lowest]
                 os: [ubuntu-latest]
+                include:
+                    - laravel: 10.*
+                      testbench: 8.*
+                    - laravel: 9.*
+                      testbench: 7.*
                 exclude:
                     - php: 7.4
                       laravel: 10.*
