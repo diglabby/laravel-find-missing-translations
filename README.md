@@ -1,3 +1,10 @@
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/diglabby/laravel-find-missing-translations.svg?style=flat-square)](https://packagist.org/packages/diglabby/laravel-find-missing-translations)
+[![Total Downloads](https://img.shields.io/packagist/dt/diglabby/laravel-find-missing-translations.svg?style=flat-square)](https://packagist.org/packages/diglabby/laravel-find-missing-translations)
+[![Test](https://github.com/diglabby/laravel-find-missing-translations/workflows/Test/badge.svg)](https://github.com/diglabby/laravel-find-missing-translations/actions/workflows/run-tests.yml)
+[![Type coverage](https://shepherd.dev/github/diglabby/laravel-find-missing-translations/coverage.svg)](https://shepherd.dev/github/diglabby/laravel-find-missing-translations)
+[![Psalm level](https://shepherd.dev/github/diglabby/laravel-find-missing-translations/level.svg)](https://shepherd.dev/github/diglabby/laravel-find-missing-translations)
+
+
 # Find missing Laravel Translations
 
 Artisan command to find missing translations.
