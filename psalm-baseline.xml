@@ -46,8 +46,5 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$this->option('base')]]></code>
     </RiskyTruthyFalsyComparison>
-    <UnnecessaryVarAnnotation>
-      <code><![CDATA[\Symfony\Component\Finder\SplFileInfo[]]]></code>
-    </UnnecessaryVarAnnotation>
   </file>
 </files>
