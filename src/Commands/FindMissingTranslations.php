@@ -127,7 +127,6 @@ class FindMissingTranslations extends Command
     {
         $fileNames = [];
 
-        /** @var \Symfony\Component\Finder\SplFileInfo[] $filesInFolder */
         $filesInFolder = File::files($directory);
 
         foreach ($filesInFolder as $fileInfo) {
