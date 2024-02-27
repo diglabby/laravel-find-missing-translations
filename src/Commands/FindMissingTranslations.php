@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Diglabby\FindMissingTranslations\Commands;
 
@@ -73,9 +75,10 @@ class FindMissingTranslations extends Command
         foreach ($baseLanguageFiles as $languageFile) {
             $baseLanguageFile = File::getRequire("{$baseLanguagePath}/{$languageFile}");
 
-            if (!in_array($languageFile, $languageFiles, true)) {
+            if (! in_array($languageFile, $languageFiles, true)) {
                 $this->comment("Comparing translations in {$languageFile}.", 'v');
                 $this->error("{$languageName}/{$languageFile} file is missing.", 'q');
+
                 continue;
             }
             $secondLanguageFile = File::getRequire("{$languagePath}/{$languageFile}");
@@ -127,7 +130,6 @@ class FindMissingTranslations extends Command
     {
         $fileNames = [];
 
-        /** @var \Symfony\Component\Finder\SplFileInfo[] $filesInFolder */
         $filesInFolder = File::files($directory);
 
         foreach ($filesInFolder as $fileInfo) {

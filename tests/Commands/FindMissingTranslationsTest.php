@@ -1,8 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Diglabby\FindMissingTranslations\Tests\Commands;
 
-use Diglabby\FindMissingTranslations\Commands\FindMissingTranslations;
 use Diglabby\FindMissingTranslations\Tests\TestCase;
 use Illuminate\Support\Facades\Artisan;
 

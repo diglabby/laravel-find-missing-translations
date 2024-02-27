@@ -1,37 +1,27 @@
-name: Test
+name: Check & fix styling
 
-on: [push]
+on:
+    push:
+        paths:
+            - '**.php'
+            - '.composer.lock'
+            - '.php_cs'
+            - '.github/workflows/php-cs-fixer.yml'
 
 jobs:
-    test:
-
+    style:
         runs-on: ubuntu-latest
-        strategy:
-            fail-fast: true
-            matrix:
-                php: [ 7.1 ]
-                dependency-version: [prefer-lowest, prefer-stable]
-
-        name: PHP ${{ matrix.php }} - ${{ matrix.dependency-version }}
 
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v1
+                uses: actions/checkout@v4
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v1
+            -   name: Fix style
+                uses: docker://oskarstark/php-cs-fixer-ga
                 with:
-                    php-version: ${{ matrix.php }}
-                    coverage: none
+                    args: --config=.php-cs-fixer.php --allow-risky=yes
 
-            -   name: Cache dependencies
-                uses: actions/cache@v1
+            -   name: Commit changes
+                uses: stefanzweifel/git-auto-commit-action@v5
                 with:
-                    path: ~/.composer/cache/files
-                    key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
-
-            -   name: Install dependencies
-                run: |
-                    composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
-            -   name: Execute tests
-                run: composer test
+                    commit_message: Fix styling
