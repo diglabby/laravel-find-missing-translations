@@ -6,11 +6,12 @@ namespace Diglabby\FindMissingTranslations\Tests\Commands;
 
 use Diglabby\FindMissingTranslations\Tests\TestCase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Test;
 
 final class FindMissingTranslationsTest extends TestCase
 {
-    /** @test */
-    public function it_does_not_report_about_synchronized_files()
+    #[Test]
+    public function it_does_not_report_about_synchronized_files(): void
     {
         $this->withoutMockingConsoleOutput();
 
@@ -22,8 +23,8 @@ final class FindMissingTranslationsTest extends TestCase
         $this->assertSame('Successfully compared all languages.', trim($output));
     }
 
-    /** @test */
-    public function it_reports_about_missing_translation_keys()
+    #[Test]
+    public function it_reports_about_missing_translation_keys(): void
     {
         $this->withoutMockingConsoleOutput();
 
