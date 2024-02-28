@@ -20,8 +20,8 @@ class FindMissingTranslations extends Command
      * @var string
      */
     protected $signature = 'translations:missing
-                                    {--dir= : Relative path of lang directory, e.g. "/resources/lang", a directory that contains all supported locales}
-                                    {--base= : Base locale, e.g. "en". All other locales are compared to this locale}';
+        {--dir= : Relative path of lang directory, e.g. "/resources/lang", a directory that contains all supported locales}
+        {--base= : Base locale, e.g. "en". All other locales are compared to this locale}';
 
     /**
      * The console command description.
@@ -29,20 +29,19 @@ class FindMissingTranslations extends Command
      */
     protected $description = 'Helps developers to finding words which are not translated, by comparing one base locale to others.';
 
-    private int $exitCode = 0;
+    private int $exitCode = self::SUCCESS;
 
-    /** @inheritDoc */
     public function handle(): int
     {
-        if ($this->option('dir') === null) {
-            $pathToLocates = resource_path(self::DEFAULT_LANG_DIRNAME);
-        } elseif (File::isDirectory($this->option('dir'))) {
-            $pathToLocates = $this->option('dir');
-        } elseif (File::isDirectory(base_path($this->option('dir')))) {
-            $pathToLocates = base_path($this->option('dir'));
-        } else {
-            throw new DirectoryNotFoundException("Specified resource directory {$this->option('dir')} does not exist.");
-        }
+        /** @var string|null $directoryOption */
+        $directoryOption = $this->option('dir');
+
+        $pathToLocates = match(true) {
+            $directoryOption === null => resource_path(self::DEFAULT_LANG_DIRNAME),
+            File::isDirectory($directoryOption) => $directoryOption,
+            File::isDirectory(base_path($directoryOption)) => base_path($directoryOption),
+            default => throw new DirectoryNotFoundException("Specified resource directory {$directoryOption} does not exist.")
+        };
 
         $baseLocale = $this->option('base') ?: config('app.locale');
         assert(is_string($baseLocale), 'Invalid base locale');
@@ -72,8 +71,8 @@ class FindMissingTranslations extends Command
     }
 
     /**
-     * @param list<string> $baseLanguageFiles
-     * @param list<string> $languageFiles
+     * @param list<string> $baseLanguageFiles Filenames
+     * @param list<string> $languageFiles Filenames
      */
     private function compareLanguages(string $baseLanguagePath, array $baseLanguageFiles, string $languagePath, array $languageFiles, string $languageName): void
     {
@@ -91,7 +90,7 @@ class FindMissingTranslations extends Command
             $missingKeys = $this->arrayDiffRecursive($baseLanguageFile, $secondLanguageFile);
 
             if (count($missingKeys) > 0) {
-                $this->exitCode = 1;
+                $this->exitCode = self::FAILURE;
 
                 $this->error("Found missing translations in /{$languageName}/{$languageFile}:", 'q');
 
@@ -107,6 +106,8 @@ class FindMissingTranslations extends Command
 
     /**
      * Compare array keys recursively
+     * @param array<string, string|array<string, string>> $firstArray
+     * @param array<string, string|array<string, string>> $secondArray
      * @return list<string>
      */
     private function arrayDiffRecursive(array $firstArray, array $secondArray): array
@@ -133,7 +134,7 @@ class FindMissingTranslations extends Command
 
     /**
      * Get filenames of directory
-     * @return list<string>
+     * @return list<string> Filenames in a given directory
      */
     private function getFilenames(string $directory): array
     {

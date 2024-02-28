@@ -4,38 +4,19 @@
     <MixedArgument>
       <code><![CDATA[$baseLanguageFile]]></code>
       <code><![CDATA[$currentLocaleDirectoryPath]]></code>
-      <code><![CDATA[$secondArray[$key]]]></code>
       <code><![CDATA[$secondLanguageFile]]></code>
     </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$baseLanguageFile]]></code>
       <code><![CDATA[$currentLocaleDirectoryPath]]></code>
       <code><![CDATA[$secondLanguageFile]]></code>
-      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedReturnTypeCoercion>
-      <code><![CDATA[$outputDiff]]></code>
-      <code><![CDATA[list<string>]]></code>
-    </MixedReturnTypeCoercion>
     <NonInvariantDocblockPropertyType>
       <code><![CDATA[$description]]></code>
     </NonInvariantDocblockPropertyType>
     <PossiblyInvalidArgument>
-      <code><![CDATA[$pathToLocates]]></code>
-      <code><![CDATA[$this->option('dir')]]></code>
-      <code><![CDATA[$this->option('dir')]]></code>
-      <code><![CDATA[$this->option('dir')]]></code>
+      <code><![CDATA[$secondArray[$key]]]></code>
     </PossiblyInvalidArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$pathToLocates]]></code>
-      <code><![CDATA[$this->option('dir')]]></code>
-      <code><![CDATA[$this->option('dir')]]></code>
-      <code><![CDATA[$this->option('dir')]]></code>
-      <code><![CDATA[$this->option('dir')]]></code>
-    </PossiblyInvalidCast>
-    <PossiblyNullOperand>
-      <code><![CDATA[$pathToLocates]]></code>
-    </PossiblyNullOperand>
     <PropertyNotSetInConstructor>
       <code><![CDATA[FindMissingTranslations]]></code>
       <code><![CDATA[FindMissingTranslations]]></code>
