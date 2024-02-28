@@ -10,16 +10,17 @@
 Artisan command to find missing translations.
 It takes a basic locale and finds missing keys/translations in other locales.
 
-<p align="center"><img src="https://user-images.githubusercontent.com/5278175/83045008-a9ce0a80-a04d-11ea-89db-90e709ca7b0d.png" alt="Package logo" width="250"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/5278175/83045008-a9ce0a80-a04d-11ea-89db-90e709ca7b0d.png" alt="Package logo" width="150"></p>
 
 Output example:
-
 <p align="center"><img src="https://i.imgur.com/0vjOwfq.gif" alt="Output example" width="500"></p>
 
 ## Installation
 ```sh
 composer require diglabby/laravel-find-missing-translations --dev
 ```
+
+The package works with Laravel 5 and higher, PHP 7.1 and higher.
 
 ## Usage
 Use default locate as base and default Laravel’s path to lang files:
