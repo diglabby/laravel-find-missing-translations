@@ -22,7 +22,8 @@ class FindMissingTranslations extends Command
     protected $signature = 'translations:missing
         {--dir= : Relative path of lang directory, e.g. "/resources/lang", a directory that contains all supported locales}
         {--base= : Base locale, e.g. "en". All other locales are compared to this locale}
-        {--only= : Only compare specified locales, e.g. "be,de,es,fr". All other locales are ignored}';
+        {--only= : Only compare specified locales, e.g. "be,de,es,fr". All other locales are ignored}
+        {--exclude= : Exclude specified locales, e.g. "be,de,es,fr". All other locales are compared}';
 
     /**
      * The console command description.
@@ -50,6 +51,9 @@ class FindMissingTranslations extends Command
 
         $onlyLocales = $this->option('only');
         $onlyLocalesArray = $onlyLocales ? explode(',', $onlyLocales) : [];
+        $excludeLocales = $this->option('exclude');
+        $excludeLocalesArray = $excludeLocales ? explode(',', $excludeLocales) : [];
+
         $localeDirectories = File::directories($pathToLocates);
         $baseLocaleFiles = $this->getFilenames($baseLocaleDirectoryPath);
 
@@ -63,6 +67,9 @@ class FindMissingTranslations extends Command
                 continue;
             }
             if (count($onlyLocalesArray) > 0 && !in_array($currentLocale, $onlyLocalesArray, true)) {
+                continue;
+            }
+            if (in_array($currentLocale, $excludeLocalesArray, true)) {
                 continue;
             }
 
