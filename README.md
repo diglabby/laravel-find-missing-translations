@@ -33,6 +33,16 @@ You can specify a base locale:
 php artisan translations:missing --base=es
 ```
 
+You can specify a list of locales to check:
+```sh
+php artisan translations:missing --base=es --only=be,en
+```
+
+You can specify a list of locales to exclude:
+```sh
+php artisan translations:missing --base=es --exclude=fr,de
+```
+
 You can specify a relative or absolute path to `lang` directory location:
 ```sh
 php artisan translations:missing --dir=/resources/my-custom-lang-dirname
