@@ -21,7 +21,9 @@ class FindMissingTranslations extends Command
      */
     protected $signature = 'translations:missing
         {--dir= : Relative path of lang directory, e.g. "/resources/lang", a directory that contains all supported locales}
-        {--base= : Base locale, e.g. "en". All other locales are compared to this locale}';
+        {--base= : Base locale, e.g. "en". All other locales are compared to this locale}
+        {--only= : Only compare specified locales, e.g. "be,de,es,fr". All other locales are ignored}
+        {--exclude= : Exclude specified locales, e.g. "be,de,es,fr". All other locales are compared}';
 
     /**
      * The console command description.
@@ -47,6 +49,11 @@ class FindMissingTranslations extends Command
         assert(is_string($baseLocale), 'Invalid base locale');
         $baseLocaleDirectoryPath = $pathToLocates.\DIRECTORY_SEPARATOR.$baseLocale;
 
+        $onlyLocales = $this->option('only');
+        $onlyLocalesArray = $onlyLocales ? explode(',', $onlyLocales) : [];
+        $excludeLocales = $this->option('exclude');
+        $excludeLocalesArray = $excludeLocales ? explode(',', $excludeLocales) : [];
+
         $localeDirectories = File::directories($pathToLocates);
         $baseLocaleFiles = $this->getFilenames($baseLocaleDirectoryPath);
 
@@ -59,10 +66,28 @@ class FindMissingTranslations extends Command
             if ($isDirectoryForBaseLocale) {
                 continue;
             }
+            if (count($onlyLocalesArray) > 0 && !in_array($currentLocale, $onlyLocalesArray, true)) {
+                continue;
+            }
+            if (in_array($currentLocale, $excludeLocalesArray, true)) {
+                continue;
+            }
 
             $this->info("Comparing {$baseLocale} to {$currentLocale}.", 'v');
 
             $this->compareLanguages($baseLocaleDirectoryPath, $baseLocaleFiles, $currentLocaleDirectoryPath, $languageFiles, $currentLocale);
+        }
+
+        if (count($onlyLocalesArray) > 0) {
+            $locales = array_map(function ($currentLocaleDirectoryPath) {
+                preg_match('/(\w{2})$/', $currentLocaleDirectoryPath, $matchedParts);
+                return $matchedParts[0];
+            }, $localeDirectories);
+            $localesMissing = array_values(array_diff($onlyLocalesArray, $locales));
+            if (count($localesMissing) > 0) {
+                $this->error('The following locales are missing:', 'q');
+                $this->table(['locale'], array_map(fn($locale) => [$locale], $localesMissing));
+            }
         }
 
         $this->info('Successfully compared all languages.');

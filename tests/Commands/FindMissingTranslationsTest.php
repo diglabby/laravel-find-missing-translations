@@ -15,7 +15,7 @@ final class FindMissingTranslationsTest extends TestCase
     {
         $this->withoutMockingConsoleOutput();
 
-        $dir = __DIR__.'/sync_lang_files';
+        $dir = __DIR__ . '/sync_lang_files';
         $exitCode = $this->artisan("translations:missing --dir=$dir --base=en");
         $output = Artisan::output();
 
@@ -28,11 +28,43 @@ final class FindMissingTranslationsTest extends TestCase
     {
         $this->withoutMockingConsoleOutput();
 
-        $dir = __DIR__.'/unsync_lang_files';
+        $dir = __DIR__ . '/unsync_lang_files';
         $exitCode = $this->artisan("translations:missing --dir=$dir --base=en");
         $output = Artisan::output();
 
         $this->assertSame(1, $exitCode);
         $this->assertStringContainsString('| be     | a.php | OK  |', $output);
+        $this->assertStringContainsString('| es     | a.php | OK  |', $output);
+        $this->assertStringContainsString('| fr     | a.php | OK  |', $output);
+    }
+
+    #[Test]
+    public function it_reports_about_missing_translation_keys_only_lang(): void
+    {
+        $this->withoutMockingConsoleOutput();
+
+        $dir = __DIR__ . '/unsync_lang_files';
+        $exitCode = $this->artisan("translations:missing --dir=$dir --base=en --only=be,es");
+        $output = Artisan::output();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('| be     | a.php | OK  |', $output);
+        $this->assertStringContainsString('| es     | a.php | OK  |', $output);
+        $this->assertStringNotContainsString('| fr     | a.php | OK  |', $output);
+    }
+
+    #[Test]
+    public function it_reports_about_missing_translation_keys_exclude_lang(): void
+    {
+        $this->withoutMockingConsoleOutput();
+
+        $dir = __DIR__ . '/unsync_lang_files';
+        $exitCode = $this->artisan("translations:missing --dir=$dir --base=en --exclude=be,fr");
+        $output = Artisan::output();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringNotContainsString('| be     | a.php | OK  |', $output);
+        $this->assertStringContainsString('| es     | a.php | OK  |', $output);
+        $this->assertStringNotContainsString('| fr     | a.php | OK  |', $output);
     }
 }
