@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.22.2@d768d914152dbbf3486c36398802f74e80cfde48">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/Commands/FindMissingTranslations.php">
+    <InvalidScalarArgument>
+      <code><![CDATA[$excludeLocales]]></code>
+      <code><![CDATA[$onlyLocales]]></code>
+    </InvalidScalarArgument>
     <MixedArgument>
       <code><![CDATA[$baseLanguageFile]]></code>
+      <code><![CDATA[$currentLocaleDirectoryPath]]></code>
       <code><![CDATA[$currentLocaleDirectoryPath]]></code>
       <code><![CDATA[$secondLanguageFile]]></code>
     </MixedArgument>
@@ -25,7 +30,14 @@
       <code><![CDATA[FindMissingTranslations]]></code>
     </PropertyNotSetInConstructor>
     <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$excludeLocales]]></code>
+      <code><![CDATA[$onlyLocales]]></code>
       <code><![CDATA[$this->option('base')]]></code>
     </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="tests/TestCase.php">
+    <LessSpecificImplementedReturnType>
+      <code><![CDATA[array]]></code>
+    </LessSpecificImplementedReturnType>
   </file>
 </files>
