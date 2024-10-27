@@ -38,7 +38,7 @@ class FindMissingTranslations extends Command
         /** @var string|null $directoryOption */
         $directoryOption = $this->option('dir');
 
-        $pathToLocates = match(true) {
+        $pathToLocates = match (true) {
             $directoryOption === null => resource_path(self::DEFAULT_LANG_DIRNAME),
             File::isDirectory($directoryOption) => $directoryOption,
             File::isDirectory(base_path($directoryOption)) => base_path($directoryOption),
@@ -47,7 +47,7 @@ class FindMissingTranslations extends Command
 
         $baseLocale = $this->option('base') ?: config('app.locale');
         assert(is_string($baseLocale), 'Invalid base locale');
-        $baseLocaleDirectoryPath = $pathToLocates.\DIRECTORY_SEPARATOR.$baseLocale;
+        $baseLocaleDirectoryPath = $pathToLocates . \DIRECTORY_SEPARATOR . $baseLocale;
 
         $onlyLocales = $this->option('only');
         $onlyLocalesArray = $onlyLocales ? explode(',', $onlyLocales) : [];
@@ -87,7 +87,7 @@ class FindMissingTranslations extends Command
             $localesMissing = array_values(array_diff($onlyLocalesArray, $locales));
             if (count($localesMissing) > 0) {
                 $this->error('The following locales are missing:', 'q');
-                $this->table(['locale'], array_map(fn ($locale) => [$locale], $localesMissing));
+                $this->table(['locale'], array_map(fn($locale) => [$locale], $localesMissing));
             }
         }
 
