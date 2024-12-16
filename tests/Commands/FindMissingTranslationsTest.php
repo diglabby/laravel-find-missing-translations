@@ -33,9 +33,24 @@ final class FindMissingTranslationsTest extends TestCase
         $output = Artisan::output();
 
         $this->assertSame(1, $exitCode);
-        $this->assertStringContainsString('| be     | a.php | OK  |', $output);
-        $this->assertStringContainsString('| es     | a.php | OK  |', $output);
-        $this->assertStringContainsString('| fr     | a.php | OK  |', $output);
+        $this->assertStringContainsString('| be     | a.php | OK ', $output);
+        $this->assertStringContainsString('| es     | a.php | OK ', $output);
+        $this->assertStringContainsString('| fr     | a.php | OK ', $output);
+    }
+
+    #[Test]
+    public function it_reports_about_missing_translation_keys_inside_group(): void
+    {
+        $this->withoutMockingConsoleOutput();
+
+        $dir = __DIR__ . '/unsync_lang_files';
+        $exitCode = $this->artisan("translations:missing --dir=$dir --base=en");
+        $output = Artisan::output();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('| be     | a.php | group.Help ', $output);
+        $this->assertStringContainsString('| es     | a.php | group.Help ', $output);
+        $this->assertStringContainsString('| fr     | a.php | group.Help ', $output);
     }
 
     #[Test]
@@ -48,9 +63,9 @@ final class FindMissingTranslationsTest extends TestCase
         $output = Artisan::output();
 
         $this->assertSame(1, $exitCode);
-        $this->assertStringContainsString('| be     | a.php | OK  |', $output);
-        $this->assertStringContainsString('| es     | a.php | OK  |', $output);
-        $this->assertStringNotContainsString('| fr     | a.php | OK  |', $output);
+        $this->assertStringContainsString('| be     | a.php | OK ', $output);
+        $this->assertStringContainsString('| es     | a.php | OK ', $output);
+        $this->assertStringNotContainsString('| fr     | a.php | OK ', $output);
     }
 
     #[Test]
@@ -63,8 +78,8 @@ final class FindMissingTranslationsTest extends TestCase
         $output = Artisan::output();
 
         $this->assertSame(1, $exitCode);
-        $this->assertStringNotContainsString('| be     | a.php | OK  |', $output);
-        $this->assertStringContainsString('| es     | a.php | OK  |', $output);
-        $this->assertStringNotContainsString('| fr     | a.php | OK  |', $output);
+        $this->assertStringNotContainsString('| be     | a.php | OK ', $output);
+        $this->assertStringContainsString('| es     | a.php | OK ', $output);
+        $this->assertStringNotContainsString('| fr     | a.php | OK ', $output);
     }
 }

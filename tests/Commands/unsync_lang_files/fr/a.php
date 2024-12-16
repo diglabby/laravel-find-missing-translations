@@ -6,5 +6,7 @@ return [
     'No' => 'Non',
     // 'OK' => 'OK', missing key
 
-    // 'group' => [], // missing group
+    'group' => [
+        // missing group key
+    ],
 ];
