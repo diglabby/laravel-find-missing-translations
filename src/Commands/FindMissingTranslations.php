@@ -120,12 +120,12 @@ class FindMissingTranslations extends Command
 
                 $this->error("Found missing translations in /{$languageName}/{$languageFile}:", 'q');
 
-                $missingKetInfo = [];
+                $missingKeyInfo = [];
                 foreach ($missingKeys as $missingKey) {
-                    $missingKetInfo[] = [$languageName, $languageFile, $missingKey];
+                    $missingKeyInfo[] = [$languageName, $languageFile, $missingKey];
                 }
 
-                $this->table(['locale', 'file', 'key'], $missingKetInfo);
+                $this->table(['locale', 'file', 'key'], $missingKeyInfo);
             }
         }
     }
