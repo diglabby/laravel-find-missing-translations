@@ -134,16 +134,19 @@ class FindMissingTranslations extends Command
      * Compare array keys recursively
      * @param array<string, string|array<string, string>> $firstArray
      * @param array<string, string|array<string, string>> $secondArray
+     * @param string|null $prefix
      * @return list<string>
      */
-    private function arrayDiffRecursive(array $firstArray, array $secondArray): array
+    private function arrayDiffRecursive(array $firstArray, array $secondArray, ?string $prefix = null): array
     {
         $outputDiff = [];
 
         foreach ($firstArray as $key => $value) {
+            $fullKey = $prefix !== null ? "{$prefix}.{$key}" : $key;
+
             if (array_key_exists($key, $secondArray)) {
                 if (is_array($value)) {
-                    $recursiveDiff = $this->arrayDiffRecursive($value, $secondArray[$key]);
+                    $recursiveDiff = $this->arrayDiffRecursive($value, $secondArray[$key], $fullKey);
                     if (count($recursiveDiff)) {
                         foreach ($recursiveDiff as $diff) {
                             $outputDiff[] = $diff;
@@ -151,7 +154,7 @@ class FindMissingTranslations extends Command
                     }
                 }
             } else {
-                $outputDiff[] = $key;
+                $outputDiff[] = $fullKey;
             }
         }
 
