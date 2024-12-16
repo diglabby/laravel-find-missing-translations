@@ -142,19 +142,16 @@ class FindMissingTranslations extends Command
         $outputDiff = [];
 
         foreach ($firstArray as $key => $value) {
-            $fullKey = $prefix !== null ? "{$prefix}.{$key}" : $key;
+            $fullKey = $prefix === null ? $key : "{$prefix}.{$key}";
 
-            if (array_key_exists($key, $secondArray)) {
-                if (is_array($value)) {
-                    $recursiveDiff = $this->arrayDiffRecursive($value, $secondArray[$key], $fullKey);
-                    if (count($recursiveDiff)) {
-                        foreach ($recursiveDiff as $diff) {
-                            $outputDiff[] = $diff;
-                        }
-                    }
-                }
-            } else {
+            if (!array_key_exists($key, $secondArray)) {
                 $outputDiff[] = $fullKey;
+
+                continue;
+            }
+
+            if (is_array($value)) {
+                $outputDiff = array_merge($outputDiff, $this->arrayDiffRecursive($value, $secondArray[$key], $fullKey));
             }
         }
 
