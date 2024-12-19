@@ -144,7 +144,7 @@ class FindMissingTranslations extends Command
         foreach ($firstArray as $key => $value) {
             $fullKey = $prefix === null ? $key : "{$prefix}.{$key}";
 
-            if (!array_key_exists($key, $secondArray)) {
+            if (! array_key_exists($key, $secondArray)) {
                 $outputDiff[] = $fullKey;
 
                 continue;
