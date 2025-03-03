@@ -11,7 +11,7 @@ use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 /**
  * Inspired by https://github.com/VetonMuhaxhiri/Laravel-find-missing-translations
  */
-class FindMissingTranslations extends Command
+final class FindMissingTranslations extends Command
 {
     private const DEFAULT_LANG_DIRNAME = 'lang';
 
