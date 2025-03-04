@@ -9,6 +9,7 @@
     findUnusedVariablesAndParams="true"
     resolveFromConfigFile="true"
     useDocblockPropertyTypes="true"
+    ensureOverrideAttribute="false"
     errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>

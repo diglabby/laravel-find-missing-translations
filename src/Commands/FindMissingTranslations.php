@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 
 /**
+ * @api
+ *
  * Inspired by https://github.com/VetonMuhaxhiri/Laravel-find-missing-translations
  */
 class FindMissingTranslations extends Command
