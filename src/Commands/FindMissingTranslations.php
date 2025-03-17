@@ -81,7 +81,7 @@ class FindMissingTranslations extends Command
         }
 
         if (count($onlyLocalesArray) > 0) {
-            $locales = array_map(function ($currentLocaleDirectoryPath) {
+            $locales = array_map(static function ($currentLocaleDirectoryPath) {
                 preg_match('/(\w{2})$/', $currentLocaleDirectoryPath, $matchedParts);
 
                 return $matchedParts[0];
@@ -89,7 +89,7 @@ class FindMissingTranslations extends Command
             $localesMissing = array_values(array_diff($onlyLocalesArray, $locales));
             if (count($localesMissing) > 0) {
                 $this->error('The following locales are missing:', 'q');
-                $this->table(['locale'], array_map(fn($locale) => [$locale], $localesMissing));
+                $this->table(['locale'], array_map(static fn($locale) => [$locale], $localesMissing));
             }
         }
 
