@@ -144,7 +144,7 @@ class FindMissingTranslations extends Command
         $outputDiff = [];
 
         foreach ($firstArray as $key => $value) {
-            $fullKey = $prefix === null ? $key : "{$prefix}.{$key}";
+            $fullKey = $prefix === null ? (string) $key : "{$prefix}.{$key}";
 
             if (! array_key_exists($key, $secondArray)) {
                 $outputDiff[] = $fullKey;
@@ -161,7 +161,7 @@ class FindMissingTranslations extends Command
     }
 
     /**
-     * Get filenames of directory
+     * Get filenames of the directory
      * @return list<string> Filenames in a given directory
      */
     private function getFilenames(string $directory): array
