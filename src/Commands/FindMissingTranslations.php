@@ -134,7 +134,7 @@ class FindMissingTranslations extends Command
 
     /**
      * Compare array keys recursively
-     * @param array<string, string|array<string, string>> $firstArray
+     * @param array<array-key, string|array<string, string>> $firstArray
      * @param array<string, string|array<string, string>> $secondArray
      * @param string|null $prefix
      * @return list<string>
