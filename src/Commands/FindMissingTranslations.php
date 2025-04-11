@@ -52,9 +52,9 @@ class FindMissingTranslations extends Command
         $baseLocaleDirectoryPath = $pathToLocates . \DIRECTORY_SEPARATOR . $baseLocale;
 
         $onlyLocales = $this->option('only');
-        $onlyLocalesArray = $onlyLocales ? explode(',', $onlyLocales) : [];
+        $onlyLocalesArray = is_string($onlyLocales) ? explode(',', $onlyLocales) : [];
         $excludeLocales = $this->option('exclude');
-        $excludeLocalesArray = $excludeLocales ? explode(',', $excludeLocales) : [];
+        $excludeLocalesArray = is_string($excludeLocales) ? explode(',', $excludeLocales) : [];
 
         $localeDirectories = File::directories($pathToLocates);
         $baseLocaleFiles = $this->getFilenames($baseLocaleDirectoryPath);
